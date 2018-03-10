@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/Quinten/platformer-base/issues"
   },
-  "homepage": "https://github.com/Quinten/platformer-base#readme"
+  "homepage": "https://github.com/Quinten/platformer-base#readme",
+  "dependencies": {
+    "phaser": "^3.2.0"
+  }
 }
