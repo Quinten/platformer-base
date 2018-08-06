@@ -1,4 +1,5 @@
 import Player from '../sprites/Player.js';
+import Enemy from '../sprites/Enemy.js';
 
 class Level extends Phaser.Scene {
 
@@ -11,6 +12,10 @@ class Level extends Phaser.Scene {
         this.player = undefined;
         this.emitter = undefined;
         this.particles = undefined;
+        this.enemies = undefined;
+        this.spawnpoints = [
+            {"x": 992, "y": 992}
+        ];
     }
 
     create()
@@ -39,9 +44,19 @@ class Level extends Phaser.Scene {
         this.sys.animatedTiles.init(this.map);
         this.sys.animatedTiles.setRate(0.65);
 
-        this.player = new Player(this, 32, 32, 'player', 0);
+        // the player
+        this.player = new Player(this, 32, 992, 'player', 0);
         this.cameras.main.startFollow(this.player, true);
         this.physics.add.collider(this.player, this.layer);
+
+        // the enemies
+        this.enemies = [];
+        for (let e = 0; e < this.spawnpoints.length; e++) {
+            let spawnpoint = this.spawnpoints[e];
+            let enemy = new Enemy(this, spawnpoint.x, spawnpoint.y, 'enemy', 0);
+            this.physics.add.collider(enemy, this.layer);
+            this.enemies.push(enemy);
+        }
 
         this.particles = this.add.particles('particles');
         this.emitter = this.particles.createEmitter({
@@ -65,6 +80,10 @@ class Level extends Phaser.Scene {
     update(time, delta)
     {
         this.player.update(this.controls, time, delta);
+        for (let e = 0; e < this.enemies.length; e++) {
+            let enemy = this.enemies[e];
+            enemy.update(this.player, time, delta);
+        }
     }
 
     resizeField(w, h)

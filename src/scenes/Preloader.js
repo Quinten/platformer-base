@@ -23,6 +23,7 @@ class Preloader extends Phaser.Scene {
         this.load.image('tiles', 'assets/tiles.png');
         this.load.tilemapTiledJSON('map', 'assets/map.json');
         this.load.spritesheet('player', 'assets/player.png', { frameWidth: 16, frameHeight: 16 });
+        this.load.spritesheet('enemy', 'assets/enemy.png', { frameWidth: 16, frameHeight: 16 });
         this.load.spritesheet('particles', 'assets/particles.png', { frameWidth: 4, frameHeight: 4 });
     }
 
