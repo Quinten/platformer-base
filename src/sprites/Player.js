@@ -6,8 +6,8 @@ class Player extends Phaser.Physics.Arcade.Sprite {
         scene.add.existing(this);
 
         this.setDepth(1);
-        this.setSize(4, 8, true);
-        this.setOffset(6, 8, true);
+        this.setSize(4, 12, true);
+        this.setOffset(6, 4, true);
         this.setCollideWorldBounds(true);
 
         // tweak stuff
@@ -89,39 +89,6 @@ class Player extends Phaser.Physics.Arcade.Sprite {
     }
 
     update(controls, time, delta) {
-
-        /*
-        //this.player.body.setVelocity(0);
-        let oldSpeedX = this.body.velocity.x;
-        let oldSpeedY = this.body.velocity.y;
-        this.body.setVelocityX(Math.min(oldSpeedX + this.speedIncrement, Math.max(oldSpeedX - this.speedIncrement, 0)));
-        this.body.setVelocityY(Math.min(oldSpeedY + this.speedIncrement, Math.max(oldSpeedY - this.speedIncrement, 0)));
-
-        let targetAnim = '';
-
-        if (controls.left) {
-            this.body.setVelocityX(Math.max(oldSpeedX - this.speedIncrement, -this.maxSpeed));
-            targetAnim = 'player-left';
-        } else if (controls.right) {
-            this.body.setVelocityX(Math.min(oldSpeedX + this.speedIncrement, this.maxSpeed));
-            this.aim = 0;
-            targetAnim = 'player-right';
-        }
-
-        if (controls.up) {
-            this.body.setVelocityY(Math.max(oldSpeedY - this.speedIncrement, -this.maxSpeed));
-            targetAnim = 'player-up';
-        } else if (controls.down) {
-            this.body.setVelocityY(Math.min(oldSpeedY + this.speedIncrement, this.maxSpeed));
-            targetAnim = 'player-down';
-        }
-
-        if (targetAnim !== '') {
-            this.anims.play(targetAnim, true);
-        } else {
-            this.anims.stop();
-        }
-        */
 
         this.body.velocity.x = 0;
 
