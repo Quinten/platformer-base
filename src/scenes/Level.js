@@ -38,7 +38,7 @@ class Level extends Phaser.Scene {
         this.sys.animatedTiles.setRate(0.65);
 
         this.player = new Player(this, 32, 32, 'player', 0);
-        this.cameras.main.startFollow(this.player, true, 0.2, 0.2);
+        this.cameras.main.startFollow(this.player, true);
         this.physics.add.collider(this.player, this.layer);
 
         this.resizeField(this.sys.game.config.width, this.sys.game.config.height);

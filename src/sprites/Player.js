@@ -11,7 +11,7 @@ class Player extends Phaser.Physics.Arcade.Sprite {
         this.setCollideWorldBounds(true);
 
         // tweak stuff
-        this.speedMax = 65;
+        this.speedMax = 60;
         this.speedChange = 10;
 
         // not tweakable
@@ -168,6 +168,13 @@ class Player extends Phaser.Physics.Arcade.Sprite {
         // don't forget to animate :)
         this.anims.play(this.ani, true);
 
+    }
+
+    render()
+    {
+        console.log(this.body.position.x);
+        //this.body.position.x = Math.round(this.body.position.x);
+        //this.body.position.y = Math.round(this.body.position.y);
     }
 }
 

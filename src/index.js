@@ -10,14 +10,14 @@ var config = {
     parent: 'phaser-game',
     width: window.innerWidth / 2,
     height: window.innerHeight / 2,
-    backgroundColor: '#4d494b',
+    backgroundColor: '#00ff00',
     pixelArt: true,
     zoom: 2,
     physics: {
         default: 'arcade',
         arcade: {
             gravity: { y: 250 },
-            debug: true
+            //debug: true
         }
     },
     plugins: {
