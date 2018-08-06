@@ -55,6 +55,7 @@ class Level extends Phaser.Scene {
             let spawnpoint = this.spawnpoints[e];
             let enemy = new Enemy(this, spawnpoint.x, spawnpoint.y, 'enemy', 0);
             this.physics.add.collider(enemy, this.layer);
+            this.physics.add.collider(enemy, this.player, this.enemyPlayerCollide, undefined, this);
             this.enemies.push(enemy);
         }
 
@@ -108,6 +109,22 @@ class Level extends Phaser.Scene {
             this.scene.restart();
         }, this);
         this.cameras.main.fadeOut(3000, 255, 242, 230);
+    }
+
+    enemyPlayerCollide(enemy, player)
+    {
+        if (enemy.alive && player.alive) {
+            if (enemy.body.touching.up) {
+                enemy.playerDeath();
+            } else {
+                player.acidDeath();
+            }
+        }
+
+        if (player.alive && enemy.body.touching.up) {
+            player.body.velocity.y = -player.jumpPower;
+            enemy.playerHit();
+        }
     }
 }
 

@@ -6,8 +6,8 @@ class Enemy extends Phaser.Physics.Arcade.Sprite {
         scene.add.existing(this);
 
         this.setDepth(1);
-        this.setSize(4, 12, true);
-        this.setOffset(6, 4, true);
+        this.setSize(4, 4, true);
+        this.setOffset(6, 12, true);
         this.setCollideWorldBounds(true);
 
         // tweak stuff
@@ -202,6 +202,19 @@ class Enemy extends Phaser.Physics.Arcade.Sprite {
         this.visible = false;
         this.body.enable = false;
         this.scene.emitter.explode(20, this.body.x, this.body.y + 8);
+    }
+
+    playerHit()
+    {
+        this.scene.emitter.explode(20, this.body.x, this.body.y + 8);
+    }
+
+    playerDeath()
+    {
+        this.alive = false;
+        this.anims.play('e-idle-left', true);
+        this.body.velocity.x = 0;
+        this.body.velocity.y = 0;
     }
 }
 

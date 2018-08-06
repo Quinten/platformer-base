@@ -13,6 +13,7 @@ class Player extends Phaser.Physics.Arcade.Sprite {
         // tweak stuff
         this.speedMax = 60;
         this.speedChange = 10;
+        this.jumpPower = 136;
 
         // not tweakable
         this.facing = 'right';
@@ -135,7 +136,7 @@ class Player extends Phaser.Physics.Arcade.Sprite {
         }
 
         if (controls.aDown && this.body.onFloor() && time > this.jumpTimer) {
-            this.body.velocity.y = -136;
+            this.body.velocity.y = -this.jumpPower;
             this.jumpTimer = time + 250;
         }
 
