@@ -1,2 +1,3 @@
 # platformer-base
-a boilerplate for making phaser3 one button platformers
+
+a boilerplate for phaser 3 platformers
