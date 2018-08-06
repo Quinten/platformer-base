@@ -13,7 +13,7 @@ class Level extends Phaser.Scene {
 
     create()
     {
-        this.cameras.main.setRoundPixels(false);
+        this.cameras.main.setRoundPixels(true);
 
         // start controls
         this.controls.start();
@@ -25,8 +25,14 @@ class Level extends Phaser.Scene {
         this.layer = this.map.createDynamicLayer(0, this.tiles, 0, 0);
         this.cameras.main.setBounds(0, 0, this.map.widthInPixels, this.map.heightInPixels);
         this.physics.world.setBounds(0, 0, this.map.widthInPixels, this.map.heightInPixels);
+
+        // only up collisions
         this.map.setCollisionBetween(65, 80);
+        this.map.forEachTile(this.setCollisionOnlyUp, this, 0, 0, this.map.width, this.map.height);
+
+        // all round collisions
         this.map.setCollisionBetween(129, 256);
+
         // animate the tiles
         this.sys.animatedTiles.init(this.map);
         this.sys.animatedTiles.setRate(0.65);
@@ -46,6 +52,17 @@ class Level extends Phaser.Scene {
     resizeField(w, h)
     {
 
+    }
+
+    setCollisionOnlyUp(tile)
+    {
+        if (tile.index < 65 || tile.index > 80) {
+            return;
+        }
+        tile.collideUp = true;
+        tile.collideDown = false;
+        tile.collideLeft = false;
+        tile.collideRight = false;
     }
 }
 
