@@ -19,7 +19,10 @@ class Player extends Phaser.Physics.Arcade.Sprite {
         this.idle = false;
         this.jumpTimer = 0;
         this.speed = 0;
-        this.ani = 'idle-left'
+        this.ani = 'idle-left';
+
+        // game state
+        this.alive = true;
 
         let anims = this.anims.animationManager;
         if (!anims.get('idle-left')) {
@@ -89,6 +92,18 @@ class Player extends Phaser.Physics.Arcade.Sprite {
     }
 
     update(controls, time, delta) {
+
+        if (!this.alive) {
+            return;
+        }
+
+        let touchedTile = this.scene.layer.getTileAtWorldXY(this.body.position.x, this.body.position.y);
+
+        if (touchedTile.properties.acid) {
+            this.acidDeath();
+        }
+
+        // movement
 
         this.body.velocity.x = 0;
 
@@ -170,11 +185,13 @@ class Player extends Phaser.Physics.Arcade.Sprite {
 
     }
 
-    render()
+    acidDeath()
     {
-        console.log(this.body.position.x);
-        //this.body.position.x = Math.round(this.body.position.x);
-        //this.body.position.y = Math.round(this.body.position.y);
+        this.alive = false;
+        this.visible = false;
+        this.body.enable = false;
+        this.scene.emitter.explode(20, this.body.x, this.body.y + 8);
+        this.scene.restartLevel();
     }
 }
 

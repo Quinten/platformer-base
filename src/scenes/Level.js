@@ -9,6 +9,8 @@ class Level extends Phaser.Scene {
         this.tiles = undefined;
         this.layer = undefined;
         this.player = undefined;
+        this.emitter = undefined;
+        this.particles = undefined;
     }
 
     create()
@@ -31,7 +33,7 @@ class Level extends Phaser.Scene {
         this.map.forEachTile(this.setCollisionOnlyUp, this, 0, 0, this.map.width, this.map.height);
 
         // all round collisions
-        this.map.setCollisionBetween(129, 256);
+        this.map.setCollisionBetween(193, 256);
 
         // animate the tiles
         this.sys.animatedTiles.init(this.map);
@@ -41,7 +43,23 @@ class Level extends Phaser.Scene {
         this.cameras.main.startFollow(this.player, true);
         this.physics.add.collider(this.player, this.layer);
 
+        this.particles = this.add.particles('particles');
+        this.emitter = this.particles.createEmitter({
+            frame: [0, 1, 2, 3],
+            x: 200,
+            y: 300,
+            speed: { min: 96, max: 160},
+            angle: { min: 225, max: 315 },
+            scale: { start: 2, end: 0 },
+            lifespan: 1000,
+            gravityY: 250,
+            frequency: -1,
+            rotate: { min: -540, max: 540 }
+        });
+
         this.resizeField(this.sys.game.config.width, this.sys.game.config.height);
+
+        this.cameras.main.flash(3000, 255, 242, 230);
     }
 
     update(time, delta)
@@ -63,6 +81,14 @@ class Level extends Phaser.Scene {
         tile.collideDown = false;
         tile.collideLeft = false;
         tile.collideRight = false;
+    }
+
+    restartLevel()
+    {
+        this.cameras.main.once('camerafadeoutcomplete', (camera) => {
+            this.scene.restart();
+        }, this);
+        this.cameras.main.fadeOut(3000, 255, 242, 230);
     }
 }
 
