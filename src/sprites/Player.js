@@ -153,7 +153,7 @@ class Player extends Phaser.Physics.Arcade.Sprite {
         }
 
         if (controls.aDown && this.body.onFloor() && time > this.jumpTimer) {
-            this.body.velocity.y = -125;
+            this.body.velocity.y = -136;
             this.jumpTimer = time + 250;
         }
 

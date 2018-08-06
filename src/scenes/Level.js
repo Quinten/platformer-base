@@ -13,7 +13,7 @@ class Level extends Phaser.Scene {
 
     create()
     {
-        this.cameras.main.setRoundPixels(true);
+        this.cameras.main.setRoundPixels(false);
 
         // start controls
         this.controls.start();
@@ -21,11 +21,12 @@ class Level extends Phaser.Scene {
 
         // do setup stuff
         this.map = this.make.tilemap({ key: 'map' });
-        this.tiles = this.map.addTilesetImage('twilight-tile-doodle', 'tiles');
+        this.tiles = this.map.addTilesetImage('tiles', 'tiles');
         this.layer = this.map.createDynamicLayer(0, this.tiles, 0, 0);
         this.cameras.main.setBounds(0, 0, this.map.widthInPixels, this.map.heightInPixels);
         this.physics.world.setBounds(0, 0, this.map.widthInPixels, this.map.heightInPixels);
-        this.map.setCollisionBetween(32, 63);
+        this.map.setCollisionBetween(65, 80);
+        this.map.setCollisionBetween(129, 256);
         // animate the tiles
         this.sys.animatedTiles.init(this.map);
         this.sys.animatedTiles.setRate(0.65);
