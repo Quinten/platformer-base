@@ -126,6 +126,16 @@ class Level extends Phaser.Scene {
             enemy.playerHit();
         }
     }
+
+    onGamePause()
+    {
+        console.log('pause game');
+    }
+
+    onGameResume()
+    {
+        console.log('resume game');
+    }
 }
 
 export default Level;

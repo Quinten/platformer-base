@@ -3,6 +3,7 @@ class Boot extends Phaser.Scene {
     constructor ()
     {
         super({ key: 'boot' });
+        this.blurredScene = undefined;
     }
 
     create ()
@@ -32,6 +33,38 @@ class Boot extends Phaser.Scene {
                 }
             }
         }
+
+        this.sys.game.events.on('pause', () => {
+            for (let scene of this.scene.manager.scenes) {
+                if (scene.scene.settings.active) {
+                    if (scene.onGamePause) {
+                        scene.onGamePause();
+                    }
+                }
+            }
+        }, this);
+
+        this.sys.game.events.on('blur', () => {
+            for (let scene of this.scene.manager.scenes) {
+                if (scene.scene.settings.active) {
+                    this.blurredScene = scene.scene.key;
+                    if (scene.onGamePause) {
+                        scene.onGamePause();
+                        scene.scene.pause();
+                    }
+                }
+            }
+        }, this);
+
+        this.sys.game.events.on('focus', () => {
+            if (this.blurredScene) {
+                this.scene.resume(this.blurredScene);
+                let scene = this.scene.manager.getScene(this.blurredScene);
+                if (scene.onGameResume) {
+                    scene.onGameResume();
+                }
+            }
+        }, this);
 
         this.scene.start('preloader');
     }
