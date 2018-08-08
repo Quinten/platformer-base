@@ -25,6 +25,7 @@ class Preloader extends Phaser.Scene {
         this.load.spritesheet('player', 'assets/player.png', { frameWidth: 16, frameHeight: 16 });
         this.load.spritesheet('enemy', 'assets/enemy.png', { frameWidth: 16, frameHeight: 16 });
         this.load.spritesheet('particles', 'assets/particles.png', { frameWidth: 4, frameHeight: 4 });
+        this.load.image('gamepaused', 'assets/gamepaused.png');
     }
 
     create ()

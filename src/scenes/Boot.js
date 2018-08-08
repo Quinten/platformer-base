@@ -32,6 +32,13 @@ class Boot extends Phaser.Scene {
                     }
                 }
             }
+            if (this.blurredScene) {
+                let scene = this.scene.manager.getScene(this.blurredScene);
+                scene.cameras.main.setViewport(0, 0, w, h);
+                if (scene.resizeField) {
+                    scene.resizeField(w, h);
+                }
+            }
         }
 
         this.sys.game.events.on('pause', () => {
@@ -64,6 +71,7 @@ class Boot extends Phaser.Scene {
                     scene.onGameResume();
                 }
             }
+            this.blurredScene = undefined;
         }, this);
 
         this.scene.start('preloader');

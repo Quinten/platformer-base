@@ -16,6 +16,7 @@ class Level extends Phaser.Scene {
         this.spawnpoints = [
             {"x": 992, "y": 992}
         ];
+        this.gamepaused = undefined;
     }
 
     create()
@@ -73,6 +74,10 @@ class Level extends Phaser.Scene {
             rotate: { min: -540, max: 540 }
         });
 
+        this.gamepaused = this.add.image(this.sys.game.config.width / 2, this.sys.game.config.height / 2, 'gamepaused');
+        this.gamepaused.visible = false;
+        this.gamepaused.setScrollFactor(0);
+
         this.resizeField(this.sys.game.config.width, this.sys.game.config.height);
 
         this.cameras.main.flash(3000, 255, 242, 230);
@@ -89,7 +94,8 @@ class Level extends Phaser.Scene {
 
     resizeField(w, h)
     {
-
+        this.gamepaused.x = w / 2;
+        this.gamepaused.y = h / 2;
     }
 
     setCollisionOnlyUp(tile)
@@ -129,12 +135,12 @@ class Level extends Phaser.Scene {
 
     onGamePause()
     {
-        console.log('pause game');
+        this.gamepaused.visible = true;
     }
 
     onGameResume()
     {
-        console.log('resume game');
+        this.gamepaused.visible = false;
     }
 }
 
