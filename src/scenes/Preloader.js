@@ -9,12 +9,12 @@ class Preloader extends Phaser.Scene {
     {
         // just a preload bar in graphics
         let progress = this.add.graphics();
-        this.load.on('progress', function (value) {
+        this.load.on('progress', (value) => {
             progress.clear();
             progress.fillStyle(0xe5ffff, 1);
-            progress.fillRect(0, (window.innerHeight / 4) - 30, window.innerWidthi / 2 * value, 60);
+            progress.fillRect(0, (this.sys.game.config.height / 2) - 30, this.sys.game.config.width * value, 60);
         });
-        this.load.on('complete', function () {
+        this.load.on('complete', () => {
             progress.destroy();
         });
 

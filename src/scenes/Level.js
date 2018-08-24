@@ -80,7 +80,7 @@ class Level extends Phaser.Scene {
 
         this.resizeField(this.sys.game.config.width, this.sys.game.config.height);
 
-        this.cameras.main.flash(3000, 255, 242, 230);
+        this.cameras.main.flash(3000, fadeColor.r, fadeColor.g, fadeColor.b);
     }
 
     update(time, delta)
@@ -114,7 +114,8 @@ class Level extends Phaser.Scene {
         this.cameras.main.once('camerafadeoutcomplete', (camera) => {
             this.scene.restart();
         }, this);
-        this.cameras.main.fadeOut(3000, 255, 242, 230);
+        fadeColor = { r: 255, g: 242, b: 230 };
+        this.cameras.main.fadeOut(3000, fadeColor.r, fadeColor.g, fadeColor.b);
     }
 
     enemyPlayerCollide(enemy, player)
