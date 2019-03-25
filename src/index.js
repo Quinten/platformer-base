@@ -14,12 +14,14 @@ let zoom = 2 * Math.max(1, Math.floor(longestSide / window.maxSize));
 
 var config = {
     type: Phaser.WEBGL,
-    parent: 'phaser-game',
-    width: window.innerWidth / zoom,
-    height: window.innerHeight / zoom,
     backgroundColor: '#00ff00',
     pixelArt: true,
-    zoom: zoom,
+    scale: {
+        mode: Phaser.Scale.NONE,
+        width: Math.ceil(window.innerWidth / zoom),
+        height: Math.ceil(window.innerHeight / zoom),
+        zoom: zoom
+    },
     physics: {
         default: 'arcade',
         arcade: {

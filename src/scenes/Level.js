@@ -74,11 +74,11 @@ class Level extends Phaser.Scene {
             rotate: { min: -540, max: 540 }
         });
 
-        this.gamepaused = this.add.image(this.sys.game.config.width / 2, this.sys.game.config.height / 2, 'gamepaused');
+        this.gamepaused = this.add.image(this.scale.width / 2, this.scale.height / 2, 'gamepaused');
         this.gamepaused.visible = false;
         this.gamepaused.setScrollFactor(0);
 
-        this.resizeField(this.sys.game.config.width, this.sys.game.config.height);
+        this.resizeField(this.scale.width, this.scale.height);
 
         this.cameras.main.flash(3000, fadeColor.r, fadeColor.g, fadeColor.b);
     }
