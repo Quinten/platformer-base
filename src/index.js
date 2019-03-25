@@ -34,7 +34,8 @@ var config = {
         ]
     },
     input: {
-        gamepad: true
+        gamepad: true,
+        queue: true
     },
     scene: [
         Boot,
