@@ -106,13 +106,13 @@ class Player extends Phaser.Physics.Arcade.Sprite {
 
         // movement
 
-        this.body.velocity.x = 0;
+        this.body.setVelocityX(0);
 
         if (controls.left) {
 
             this.speed -= this.speedChange;
             this.speed = Math.max(this.speed, -this.speedMax);
-            this.body.velocity.x = this.speed;
+            this.body.setVelocityX(this.speed);
 
             this.facing = 'left';
             this.idle = false;
@@ -121,7 +121,7 @@ class Player extends Phaser.Physics.Arcade.Sprite {
 
             this.speed += this.speedChange;
             this.speed = Math.min(this.speed, this.speedMax);
-            this.body.velocity.x = this.speed;
+            this.body.setVelocityX(this.speed);
 
             this.facing = 'right';
             this.idle = false;
@@ -129,14 +129,14 @@ class Player extends Phaser.Physics.Arcade.Sprite {
         } else {
 
             this.speed += (0 - this.speed) / 2;
-            this.body.velocity.x = this.speed;
+            this.body.setVelocityX(this.speed);
 
             this.idle = true;
 
         }
 
         if (controls.aDown && this.body.onFloor() && time > this.jumpTimer) {
-            this.body.velocity.y = -this.jumpPower;
+            this.body.setVelocityY(-this.jumpPower);
             this.jumpTimer = time + 250;
         }
 
