@@ -12,6 +12,8 @@ class SimplePlatformerControls extends Phaser.Plugins.ScenePlugin {
         //this.bDown = false;
         this.events = new Phaser.Events.EventEmitter();
         this.input = undefined;
+        this.lastMobDir = 'idle-right';
+        this.prefInputMethod = scene.sys.game.device.input.touch ? 'touch' : 'keyboard';
     }
 
     start() {
@@ -28,6 +30,7 @@ class SimplePlatformerControls extends Phaser.Plugins.ScenePlugin {
                     this.aDown = true;
                     break;
             }
+            this.prefInputMethod = 'gamepad';
         }, this);
 
         this.input.keyboard.on('keydown', (e) => {
@@ -41,6 +44,7 @@ class SimplePlatformerControls extends Phaser.Plugins.ScenePlugin {
                     break;
                 */
             }
+            this.prefInputMethod = 'keyboard';
         });
 
         this.input.gamepad.on('up', (pad, button, index) => {
@@ -63,6 +67,7 @@ class SimplePlatformerControls extends Phaser.Plugins.ScenePlugin {
 
         this.scene.events.on('preupdate', this.preUpdate, this);
         this.scene.events.on('shutdown', this.shutdown, this);
+
     }
 
     preUpdate()
@@ -78,6 +83,52 @@ class SimplePlatformerControls extends Phaser.Plugins.ScenePlugin {
             this.right = this.cursors.right.isDown;
             this.down = this.cursors.down.isDown;
             this.left = this.cursors.left.isDown;
+        }
+
+        if (this.prefInputMethod == 'touch') {
+
+            if (this.input.activePointer.justUp) {
+                switch (this.lastMobDir) {
+                    case 'idle-right':
+                        this.lastMobDir = 'run-right';
+                        break;
+                    case 'idle-left':
+                        this.lastMobDir = 'run-left';
+                        break;
+                    case 'run-right':
+                        this.lastMobDir = 'run-left';
+                        break;
+                    case 'run-left':
+                        this.lastMobDir = 'run-right';
+                        break;
+                }
+            }
+
+            switch (this.lastMobDir) {
+                case 'idle-right':
+                case 'idle-left':
+                    this.left = false;
+                    this.right = false;
+                    break;
+                case 'run-right':
+                    this.right = true;
+                    this.left = false;
+                    break;
+                case 'run-left':
+                    this.right = false;
+                    this.left = true;
+                    break;
+            }
+
+            if (this.input.activePointer.isDown) {
+                this.aDown = true;
+                this.up = true;
+                this.down = false;
+            } else {
+                this.aDown = false;
+                this.up = false;
+                this.down = true;
+            }
         }
     }
 
