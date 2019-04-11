@@ -2,6 +2,19 @@
   "name": "platformer-base",
   "version": "0.0.1",
   "description": "a boilerplate for phaser 3 platformers",
+  "title": "Platformer Base",
+  "shortName": "Platformer",
+  "body": {
+    "background": "#000000",
+    "color": "#ffffff",
+    "fontFamily": "monospace"
+  },
+  "orientation": "portrait",
+  "author": "Quinten Clause",
+  "twitter": "@supernapie",
+  "website": "https://supernapie.com",
+  "gaId": "UA-116110800-1",
+  "fbId": "1418768124974325",
   "main": "src/index.js",
   "scripts": {
     "deploy": "git subtree push --prefix pub/ origin gh-pages",
@@ -12,7 +25,6 @@
     "type": "git",
     "url": "git+https://github.com/Quinten/platformer-base.git"
   },
-  "author": "Quinten Clause",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/Quinten/platformer-base/issues"
@@ -22,6 +34,7 @@
     "phaser": "^3.16.2"
   },
   "devDependencies": {
+    "html-webpack-plugin": "^3.2.0",
     "raw-loader": "^0.5.1",
     "webpack": "^4.29.6",
     "webpack-cli": "^3.3.0",
