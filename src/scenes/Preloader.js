@@ -7,6 +7,8 @@ class Preloader extends Phaser.Scene {
 
     preload ()
     {
+        this.sys.canvas.style.display = 'block';
+
         // just a preload bar in graphics
         let progress = this.add.graphics();
         this.load.on('progress', (value) => {

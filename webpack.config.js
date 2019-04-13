@@ -4,6 +4,7 @@ const webpack = require('webpack');
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const config = require('./package');
+const TerserPlugin = require('terser-webpack-plugin');
 
 module.exports = (env, argv) => {
 
@@ -28,7 +29,7 @@ module.exports = (env, argv) => {
                 test: /\.js$/,
                 exclude: /node_modules/,
                 use: {
-                    loader: "babel-loader"
+                    loader: 'babel-loader'
                 }
             }]
         },
@@ -52,8 +53,17 @@ module.exports = (env, argv) => {
     }
 
     if (!devMode) {
-        // some more production stuff
-        // ...
+        webpackConfig.optimization = {
+            minimizer: [
+                new TerserPlugin({
+                    terserOptions: {
+                        output: {
+                            comments: false
+                        }
+                    }
+                })
+            ]
+        }
     }
 
     return webpackConfig;

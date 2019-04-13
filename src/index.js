@@ -5,6 +5,11 @@ import Level from './scenes/Level.js';
 import AnimatedTiles from './plugins/AnimatedTiles.js';
 import SimplePlatformerControls from './plugins/SimplePlatformerControls.js';
 
+var prePreLoader = document.getElementById('loading');
+if (prePreLoader && prePreLoader.parentNode) {
+    prePreLoader.parentNode.removeChild(prePreLoader);
+}
+
 window.fadeColor = { r: 255, g: 242, b: 230 };
 
 window.maxSize = 1024;
@@ -45,14 +50,6 @@ var config = {
         Level
     ]
 };
-
-// improve iframe focus
-window.addEventListener('load', function () {
-    window.focus();
-    document.body.addEventListener('click',function(e) {
-        window.focus();
-    },false);
-});
 
 // start game
 window.game = new Phaser.Game(config);
