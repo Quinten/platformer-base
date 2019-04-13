@@ -23,6 +23,13 @@ module.exports = (env, argv) => {
             rules: [{
                 test: [ /\.vert$/, /\.frag$/ ],
                 use: 'raw-loader'
+            },
+            {
+                test: /\.js$/,
+                exclude: /node_modules/,
+                use: {
+                    loader: "babel-loader"
+                }
             }]
         },
 
