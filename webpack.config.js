@@ -8,6 +8,7 @@ const TerserPlugin = require('terser-webpack-plugin');
 const WebappWebpackPlugin = require('webapp-webpack-plugin');
 const SafariPinnedTabPlugin = require('./webpack/safari-pinned-tab-webpack-plugin');
 const GoogleAnalyticsPlugin = require('./webpack/google-analytics-webpack-plugin');
+const ServiceWorkerPlugin = require('./webpack/service-worker-webpack-plugin');
 
 module.exports = (env, argv) => {
 
@@ -100,6 +101,7 @@ module.exports = (env, argv) => {
 
         webpackConfig.plugins.push(new SafariPinnedTabPlugin( { color: config.body.color } ));
         webpackConfig.plugins.push(new GoogleAnalyticsPlugin( { id: config.gaId } ));
+        webpackConfig.plugins.push(new ServiceWorkerPlugin( { version: config.version } ));
 
     }
 
